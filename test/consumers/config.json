@@ -1,0 +1,36 @@
+[
+    {
+        "consumer": {
+            "name": "kafka",
+            "config": {
+                "max_retries": -1,
+                "retry_delay": 5,
+                "record_check_frequency": 15,
+                "client_name": "default",
+                "topic": "purchases",
+                "consumer_options": {
+                    "bootstrap.servers": "localhost:9092",
+                    "group.id": "01",
+                    "auto.offset.reset": "earliest",
+                    "enable.auto.commit": "false",
+                    "enable.partition.eof": "true",
+                    "session.timeout.ms": "60000",
+                    "heartbeat.interval.ms": "15000"
+                }
+            }
+        },
+        "processors": [
+            {
+                "name": "noop"
+            }
+        ],
+        "storages": [
+            {
+                "name": "filesystem",
+                "config": {
+                    "path": "fs/"
+                }
+            }
+        ]
+    }
+]
