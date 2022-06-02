@@ -9,10 +9,10 @@
                 "client_name": "default",
                 "topic": "purchases",
                 "consumer_options": {
-                    "host": "amqp://user:bitnami@:::5672/",
-                    "exchange_name": "",
-                    "exchange_type": "",
-                    "queue_name": "",
+                    "host": "amqp://guest:cookapps@:::5672/",
+                    "exchange_name": "amq.direct",
+                    "exchange_type": "direct",
+                    "queue_name": "mock-data",
                     "routing_key": ""
                 }
             }

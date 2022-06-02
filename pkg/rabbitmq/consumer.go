@@ -44,8 +44,18 @@ type RabbitMQConsumer struct {
 }
 
 // Read implements Consumer
-func (*RabbitMQConsumer) Read(ctx context.Context) error {
+func (rc *RabbitMQConsumer) Read(ctx context.Context) error {
 	// TODO: 1주차 과제 입니다.
+	var body map[string]interface{}
+	var err error
+
+	body, err = rc.FetchRecords()
+	logger.Debugf("%s", body)
+	if err != nil {
+		return err
+	}
+
+	ctx.Done()
 	return nil
 }
 
@@ -263,7 +273,7 @@ func (c *RabbitMQConsumer) QueueBind() error {
 func (c *RabbitMQConsumer) InitDeliveryChannel() error {
 	msg, err := c.ch.Consume(
 		c.config.QueueName, // queue
-		"",                 // consumer
+		"consumer",         // consumer
 		true,               // auto-ack
 		false,              // exclusive
 		false,              // no-local

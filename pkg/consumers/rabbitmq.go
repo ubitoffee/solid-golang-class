@@ -66,6 +66,11 @@ func (rc *RabbitMQConsumerClient) Init() error {
 		return err
 	}
 
+	err = rc.QueueBind()
+	if err != nil {
+		return err
+	}
+
 	err = rc.InitDeliveryChannel()
 	if err != nil {
 		return err
