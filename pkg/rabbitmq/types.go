@@ -1,6 +1,6 @@
 package rabbitmq
 
-type jsonObj map[string]interface{}
+type jsonObj = map[string]interface{}
 type RabbitMQConsumerConfig struct {
 	Host         string `json:"host,omitempty"`
 	ExchangeName string `json:"exchange_name,omitempty"`
