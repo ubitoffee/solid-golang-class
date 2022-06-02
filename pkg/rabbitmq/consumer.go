@@ -50,11 +50,7 @@ func (*RabbitMQConsumer) Read(ctx context.Context) error {
 }
 
 func NewRabbitMQConsumer(config jsonObj) *RabbitMQConsumer {
-
 	pipeParams, ok := config["pipeParams"].(jsonObj)
-	logger.Debugf("%s", pipeParams)
-	logger.Debugf("%s", config["pipeParams"])
-	logger.Debugf("%s", config["pipeParams"].(jsonObj))
 	if !ok {
 		logger.Panicf("no pipeParams provided")
 	}
@@ -77,8 +73,14 @@ func NewRabbitMQConsumer(config jsonObj) *RabbitMQConsumer {
 		logger.Panicf("no stream provided")
 	}
 
+	//consumerOptions
+	rmqCnsmrCfg, ok := config["consumerOptions"].(jsonObj)
+	if !ok {
+		logger.Panicf("no consumer option provided")
+	}
+
 	var cfg RabbitMQConsumerConfig
-	cfgData, err := json.Marshal(config)
+	cfgData, err := json.Marshal(rmqCnsmrCfg)
 	if err != nil {
 		logger.Panicf("error in mashalling rabbitmq configuration: %v", err)
 		return nil

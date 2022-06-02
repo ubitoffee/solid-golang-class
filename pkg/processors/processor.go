@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type jsonObj map[string]interface{}
+type jsonObj = map[string]interface{}
 
 type ProcessorFactory func(config jsonObj) Processor
 
