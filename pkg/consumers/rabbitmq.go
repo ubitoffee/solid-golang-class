@@ -27,7 +27,6 @@ type RabbitMQConsumerClient struct {
 }
 
 func NewRabbitMQConsumerClient(config jsonObj) Consumer {
-	logger.Debugf("%s", config)
 
 	//TODO: 1주차 과제입니다.
 	consumerCfgObj, ok := config["consumerCfg"].(jsonObj)
