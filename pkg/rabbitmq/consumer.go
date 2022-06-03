@@ -50,13 +50,19 @@ func (rc *RabbitMQConsumer) Read(ctx context.Context) error {
 	var err error
 
 	body, err = rc.FetchRecords()
-	logger.Debugf("%s", body)
 	if err != nil {
-		return err
+		logger.Errorf("%s", err)
 	}
 
-	ctx.Done()
-	return nil
+	for {
+		select {
+		case <-ctx.Done():
+			logger.Debugf("shutting down consumer read")
+			return nil
+		default:
+			rc.stream <- body
+		}
+	}
 }
 
 func NewRabbitMQConsumer(config jsonObj) *RabbitMQConsumer {
